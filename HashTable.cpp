@@ -1,6 +1,7 @@
 #include "HashTable.h"
 #include <iostream>
-HashTable::HashTable() : data(nullptr), bucket(0) {}; 
+
+HashTable::HashTable() : data(nullptr), bucket(0) {}  
 
 HashTable::HashTable(int s): bucket(s)
 {
@@ -46,8 +47,9 @@ void HashTable::insert(int k, int v)
     }
     else
     {
+        Element * next_element = data[hash]->next;
         data[hash]->next = newElement;
-        newElement->next = nullptr;
+        newElement->next = next_element;
     }
     
 }

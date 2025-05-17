@@ -1,5 +1,6 @@
 #include <iostream>
 #include "HashTable.h"
+
 int main()
 {
     HashTable table(10);
@@ -14,5 +15,9 @@ int main()
     table.insert(18,1);
     table.insert(19,1);
     table.insert(29,5);
+    table.insert(7,5);
+    table.insert(39,5);
+    table.insert(41,5);
+    table.insert(1,5);
     table.print();
 }
