@@ -46,7 +46,6 @@ void HashTable::insert(int k, int v)
     }
     else
     {
-        //Element* next = data[hash]->next;
         data[hash]->next = newElement;
         newElement->next = nullptr;
     }
