@@ -8,7 +8,7 @@ int main()
     table.insert(12, 1);
     table.insert(13, 1);
     table.insert(14, 1);
-    table.insert(10, 1);
+    table.insert(111, 1);
     table.insert(15, 1);
     table.insert(16, 1);
     table.insert(17, 1);
@@ -19,5 +19,7 @@ int main()
     table.insert(39, 5);
     table.insert(41, 5);
     table.insert(1, 5);
+    table.print();
+    table.remove(39, 5);
     table.print();
 }

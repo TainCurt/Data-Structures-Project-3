@@ -53,3 +53,36 @@ void HashTable::insert(int k, int v)
         last->next = newElement;
     }
 }
+
+void HashTable::remove(int k, int v)
+{
+    int hash = hash_fun(k);
+    Element *current = data[hash];
+    if (current == nullptr)
+    {
+        std::cout << "No bucket there! \n";
+        return;
+    }
+
+    if (current->key == k && current->value == v)
+    {
+        data[hash] = current->next;
+        delete current;
+        return;
+    }
+
+
+    while(current->next != nullptr)
+    {
+        if (current->next->key == k && current->next->value == v)
+        {
+            Element *rem = current->next;
+            current->next = rem->next;
+            delete rem;
+            return;
+        }
+
+        current = current->next;
+    }
+    std::cout << "No element there! \n";
+}

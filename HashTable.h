@@ -16,5 +16,5 @@ public:
     //~HashTable();
     void print();
     void insert(int k, int v);
-    // void remowe();
+    void remove(int k, int v);
 };
