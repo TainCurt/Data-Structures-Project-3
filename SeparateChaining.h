@@ -2,7 +2,7 @@
 
 #include "Element.h"
 
-class HashTable
+class SeparateChaining
 {
 private:
     Element **data;
@@ -11,8 +11,8 @@ private:
     int hash_fun(int key);
 
 public:
-    HashTable();
-    HashTable(int s);
+    SeparateChaining();
+    SeparateChaining(int s);
     //~HashTable();
     void print();
     void insert(int k, int v);

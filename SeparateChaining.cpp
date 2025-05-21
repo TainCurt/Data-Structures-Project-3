@@ -1,9 +1,9 @@
-#include "HashTable.h"
+#include "SeparateChaining.h"
 #include <iostream>
 
-HashTable::HashTable() : data(nullptr), bucket(0) {}
+SeparateChaining::SeparateChaining() : data(nullptr), bucket(0) {}
 
-HashTable::HashTable(int s) : bucket(s)
+SeparateChaining::SeparateChaining(int s) : bucket(s)
 {
     data = new Element *[bucket];
     for (int i = 0; i < bucket; i++)
@@ -12,12 +12,12 @@ HashTable::HashTable(int s) : bucket(s)
     }
 }
 
-int HashTable::hash_fun(int key)
+int SeparateChaining::hash_fun(int key)
 {
     return key % bucket;
 }
 
-void HashTable::print()
+void SeparateChaining::print()
 {
     for (int i = 0; i < bucket; i++)
     {
@@ -35,7 +35,7 @@ void HashTable::print()
     std::cout << std::endl;
 }
 
-void HashTable::insert(int k, int v)
+void SeparateChaining::insert(int k, int v)
 {
     int hash = hash_fun(k);
     Element *newElement = new Element(k, v);
@@ -54,7 +54,7 @@ void HashTable::insert(int k, int v)
     }
 }
 
-void HashTable::remove(int k, int v)
+void SeparateChaining::remove(int k, int v)
 {
     int hash = hash_fun(k);
     Element *current = data[hash];

@@ -1,9 +1,9 @@
 #include <iostream>
-#include "HashTable.h"
+#include "SeparateChaining.h"
 
 int main()
 {
-    HashTable table(10);
+    SeparateChaining table(10);
     table.insert(11, 1);
     table.insert(12, 1);
     table.insert(13, 1);
