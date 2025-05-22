@@ -8,7 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "D:/Coding/C++/SD3/main.cpp",
-                "D:/Coding/C++/SD3/HashTable.cpp",
+                "D:/Coding/C++/SD3/SeparateChaining.cpp",
+                "D:/Coding/C++/SD3/LinearProbing.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
