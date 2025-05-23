@@ -1,20 +1,21 @@
 #include <iostream>
 #include "SeparateChaining.h"
 #include "LinearProbing.h"
+#include "AVL.h"
 
 int main()
 {
-    LinearProbing table(10);
-    table.insert(3, 1);
-    table.insert(33, 2);
-    table.insert(18, 3);
-    table.insert(10, 4);
-    table.insert(112, 9);
-    table.insert(117, 10);
-    table.print();
-    table.remove(25, 5);
-    table.print();
-    int s = table.getsize();
-    int c = table.getcap();
-    std::cout << "\n " << s << " --------- " << c;
+    AVL tree(5);
+    tree.insert(10, 100);
+    tree.insert(20, 200);
+    tree.insert(5, 50);
+    tree.insert(15, 150);
+    tree.insert(25, 250);
+    tree.insert(30, 300);
+    tree.insert(7, 70);
+
+    std::cout << "Drzewa AVL w bucketach:\n";
+    tree.print_all();
+    tree.remove(10, 100);
+    tree.print_all();
 }

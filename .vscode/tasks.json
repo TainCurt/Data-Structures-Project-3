@@ -10,6 +10,7 @@
                 "D:/Coding/C++/SD3/main.cpp",
                 "D:/Coding/C++/SD3/SeparateChaining.cpp",
                 "D:/Coding/C++/SD3/LinearProbing.cpp",
+                "D:/Coding/C++/SD3/AVL.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
