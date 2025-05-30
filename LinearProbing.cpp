@@ -20,7 +20,7 @@ int LinearProbing::hash_fun(int key)
 void LinearProbing::insert(int k, int v)
 {
     lf = size * 10 / capacity;
-    std::cout << "$" << lf << "$\n";
+    //std::cout << "$" << lf << "$\n";
     if (lf >= 7)
     {
         increase_capacity();
@@ -35,12 +35,19 @@ void LinearProbing::insert(int k, int v)
         }
     }
 
-    std::cout << "*" << scale << "*\n";
+    //std::cout << "*" << scale << "*\n";
     int hash = hash_fun(k);
     for (int i = 0; i < capacity; i++)
     {
         int h = (hash + scale * i) % capacity;
-        std::cout << "&" << k << "--" << h << "&\n";
+        //std::cout << "&" << k << "--" << h << "&\n";
+
+        if (array[h].key == k)
+        {
+            array[h].value = v;
+            return;
+        }
+
         if (!array[h].is_occupied)
         {
             array[h].key = k;
