@@ -7,7 +7,7 @@ class SeparateChaining
 private:
     Element **data;
     int bucket;
-
+    int lf;
     int hash_fun(int key);
 
 public:

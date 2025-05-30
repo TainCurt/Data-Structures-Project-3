@@ -19,15 +19,28 @@ int LinearProbing::hash_fun(int key)
 
 void LinearProbing::insert(int k, int v)
 {
-    if (size == capacity)
+    lf = size * 10 / capacity;
+    std::cout << "$" << lf << "$\n";
+    if (lf >= 7)
     {
         increase_capacity();
     }
 
+    for (int i = 1; i < 10; i++)
+    {
+        if (capacity % i != 0)
+        {
+            scale = i;
+            break;
+        }
+    }
+
+    std::cout << "*" << scale << "*\n";
     int hash = hash_fun(k);
     for (int i = 0; i < capacity; i++)
     {
-        int h = (hash + i) % capacity;
+        int h = (hash + scale * i) % capacity;
+        std::cout << "&" << k << "--" << h << "&\n";
         if (!array[h].is_occupied)
         {
             array[h].key = k;
@@ -59,7 +72,7 @@ void LinearProbing::remove(int k, int v)
             size--;
             return;
         }
-        else if (temp == capacity - hash -1)
+        else if (temp == capacity - hash - 1)
         {
             std::cout << "No element there! \n";
             return;
@@ -73,14 +86,23 @@ void LinearProbing::increase_capacity()
     capacity = (size == 0) ? 1 : capacity * 2;
     Linear_Element *temp = new Linear_Element[capacity];
     int hash;
-    for (int i = 0; i < capacity / 2; i++)
+    for (int j = 0; j < capacity / 2; j++)
     {
-        hash = hash_fun(array[i].key);
-        if (!temp[hash].is_occupied)
+        if (array[j].key != 0)
         {
-            temp[hash].key = array[i].key;
-            temp[hash].value = array[i].value;
-            temp[hash].is_occupied = true;
+
+            hash = hash_fun(array[j].key);
+            for (int i = 0; i < capacity / 2; i++)
+            {
+                int h = (hash + scale * i) % capacity;
+                if (!temp[h].is_occupied)
+                {
+                    temp[h].key = array[j].key;
+                    temp[h].value = array[j].value;
+                    temp[h].is_occupied = true;
+                    break;
+                }
+            }
         }
     }
     delete[] array;

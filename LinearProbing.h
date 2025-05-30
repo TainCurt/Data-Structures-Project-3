@@ -13,6 +13,8 @@ class LinearProbing
 private:
     int size;
     int capacity;
+    int scale;
+    int lf;
     Linear_Element *array;
     int hash_fun(int key);
     void increase_capacity();
