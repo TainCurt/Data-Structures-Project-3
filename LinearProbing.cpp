@@ -1,8 +1,8 @@
 #include "LinearProbing.h"
 #include <iostream>
-LinearProbing::LinearProbing() : size(0), capacity(0), array(nullptr) {}
+LinearProbing::LinearProbing() : size(0), capacity(0), scale(0), lf(0), array(nullptr) {}
 
-LinearProbing::LinearProbing(int s) : size(0), capacity(s)
+LinearProbing::LinearProbing(int s) : size(0), scale(0), lf(0), capacity(s)
 {
     array = new Linear_Element[capacity];
     // for (int i = 0; i < capacity; i++)
@@ -19,9 +19,15 @@ int LinearProbing::hash_fun(int key)
 
 void LinearProbing::insert(int k, int v)
 {
-    lf = size * 10 / capacity;
-    //std::cout << "$" << lf << "$\n";
-    if (lf >= 7)
+    // std::cout << "$" << lf << "$\n";
+    //  lf = size * 10 / (capacity+1);
+    //  if (lf >= 7)
+    //  {
+    //      increase_capacity();
+    //  }
+    // capacity = (capacity == 0) ? 1 : capacity;
+    // size++;
+    if (10 * size >= 8 * capacity)
     {
         increase_capacity();
     }
@@ -35,16 +41,17 @@ void LinearProbing::insert(int k, int v)
         }
     }
 
-    //std::cout << "*" << scale << "*\n";
+    // std::cout << "*" << scale << "*\n";
     int hash = hash_fun(k);
     for (int i = 0; i < capacity; i++)
     {
         int h = (hash + scale * i) % capacity;
-        //std::cout << "&" << k << "--" << h << "&\n";
+        // std::cout << "&" << k << "--" << h << "&\n";
 
         if (array[h].key == k)
         {
             array[h].value = v;
+            // size--;
             return;
         }
 

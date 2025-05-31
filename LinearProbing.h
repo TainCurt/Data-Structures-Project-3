@@ -22,6 +22,7 @@ private:
 public:
     int getsize() const { return size; }
     int getcap() const { return capacity; }
+    int getscale() const { return scale; }
     LinearProbing();
     LinearProbing(int s);
     //~LinearProbing();

@@ -17,7 +17,9 @@ using std::make_unique;
 vector<int> generate_keys_unique(int size, int min, int max)
 {
     vector<int> base;
-    for (int i = 0; i <= size; ++i)
+    min = (min == 0) ? 1 : min;
+    
+    for (int i = min; i <= max; ++i)
     {
         base.push_back(i);
     }
@@ -36,7 +38,7 @@ vector<int> generate_random(int size, int min, int max)
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dist(min, max);
+    std::uniform_int_distribution<int> dist(min+1, max);
 
     for (int i = 0; i < size; i++)
     {
@@ -47,38 +49,22 @@ vector<int> generate_random(int size, int min, int max)
 }
 
 template <class T>
-vector<unique_ptr<T>> create_and_fill(int quantity, int size, int min, int max, int choice)
+vector<unique_ptr<T>> create_and_fill(const vector<int> &keys, const vector<int> &values)
 {
-    vector<int> keys;
-    switch (choice)
+    vector<unique_ptr<T>> copies;
+    int size = 100;
+    copies.reserve(size);
+    for (int i = 0; i < size; i++)
     {
-    case 1:
-        keys = generate_random(size, min, max);
-        break;
-    case 2:
-        keys = generate_keys_unique(size, min, max);
-        break;
-    default:
-        std::cerr << "Invalid key generation choice. Must be 1 (random) or 2 (unique).\n";
-        return {};
+        copies.push_back(make_unique<T>());
     }
 
-    vector<int> values = generate_random(size, min, max);
-
-    vector<unique_ptr<T>> data;
-    data.reserve(quantity);
-    for (int i = 0; i < quantity; i++)
-    {
-        data.push_back(make_unique<T>());
-    }
-
-    for (auto& instance : data)
+    for(auto &cop : copies)
     {
         for (int i = 0; i < size; i++)
         {
-            instance->insert(keys[i], values[i]);
+            cop->insert(keys[i], values[i]);
         }
     }
-
-    return data;
+    return copies;
 }
