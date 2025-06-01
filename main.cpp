@@ -12,25 +12,34 @@ using std::endl;
 
 int main()
 {
-    vector<int> keys = generate_keys_unique(100, 0, 100);
-    vector<int> values = generate_random(100, 0, 100);
-    for (int i = 0; i < 100; i++)
-    {
-        cout << keys[i] << "\n";
-    }
+    SeparateChaining chain(10);
+    chain.insert(1, 2);
+    chain.insert(12, 2);
+    chain.insert(15, 2);
+    chain.insert(11, 2);
+    chain.insert(122, 5);
+    chain.insert(142, 5);
+    chain.insert(112, 5);
+    chain.insert(132, 5);
+    chain.insert(162, 5);
+    chain.insert(5, 2);
+    chain.insert(2, 2);
+    chain.insert(10, 2);
+    chain.insert(3, 2);
+    chain.insert(4, 2);
+    chain.insert(6, 2);
+    chain.insert(7, 2);
+    chain.insert(8, 2);
+    chain.insert(8, 2);
+    chain.insert(9, 2);
+    chain.insert(29, 2111);
+
+    chain.print();
+    cout << chain.getsize();
     cout << endl;
-    vector<unique_ptr<LinearProbing>> copies = create_and_fill<LinearProbing>(keys, values);
-    // copies[1]->insert(13, -11);
-    copies[1]->insert(120, 1);
-    copies[1]->insert(1114, 1);
-    copies[1]->insert(128, 1);
-    // copies[1]->insert(128, 1);
-    copies[1]->insert(278, 1);
-    copies[1]->print();
+    cout << chain.get_posiotion(2);
     cout << endl;
-    cout << copies[1]->getcap();
+    cout << chain.getqua();
     cout << endl;
-    cout << copies[1]->getsize();
-    cout << endl;
-    cout << copies[1]->getscale();
+    cout << chain.get_biggest();
 }
