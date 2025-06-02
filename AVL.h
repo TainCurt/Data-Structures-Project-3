@@ -16,6 +16,9 @@ private:
     AVL_Node *right_rotate(AVL_Node *ynode);
     AVL_Node *left_rotate(AVL_Node *xnode);
     AVL_Node *find_min(AVL_Node *node);
+    void increase_bucket();
+    void reinsert_tree(AVL_Node *node);
+    void destroy_tree(AVL_Node *node);
 
 public:
     AVL();

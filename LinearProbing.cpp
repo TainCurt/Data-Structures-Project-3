@@ -1,6 +1,6 @@
 #include "LinearProbing.h"
 #include <iostream>
-LinearProbing::LinearProbing() : size(0), capacity(0), scale(0), lf(0), array(nullptr) {}
+LinearProbing::LinearProbing() : size(7), capacity(0), scale(0), lf(0), array(nullptr) {}
 
 LinearProbing::LinearProbing(int s) : size(0), scale(0), lf(0), capacity(s)
 {
@@ -19,27 +19,19 @@ int LinearProbing::hash_fun(int key)
 
 void LinearProbing::insert(int k, int v)
 {
-    // std::cout << "$" << lf << "$\n";
-    //  lf = size * 10 / (capacity+1);
-    //  if (lf >= 7)
-    //  {
-    //      increase_capacity();
-    //  }
-    // capacity = (capacity == 0) ? 1 : capacity;
-    // size++;
     if (10 * size >= 8 * capacity)
     {
         increase_capacity();
     }
 
-    for (int i = 1; i < 10; i++)
-    {
-        if (capacity % i != 0)
-        {
-            scale = i;
-            break;
-        }
-    }
+    // for (int i = 1; i < 10; i++)
+    // {
+    //     if (capacity % i != 0)
+    //     {
+    //         scale = i;
+    //         break;
+    //     }
+    // }
 
     // std::cout << "*" << scale << "*\n";
     int hash = hash_fun(k);

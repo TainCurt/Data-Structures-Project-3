@@ -12,34 +12,29 @@ using std::endl;
 
 int main()
 {
-    SeparateChaining chain(10);
-    chain.insert(1, 2);
-    chain.insert(12, 2);
-    chain.insert(15, 2);
-    chain.insert(11, 2);
-    chain.insert(122, 5);
-    chain.insert(142, 5);
-    chain.insert(112, 5);
-    chain.insert(132, 5);
-    chain.insert(162, 5);
-    chain.insert(5, 2);
-    chain.insert(2, 2);
-    chain.insert(10, 2);
-    chain.insert(3, 2);
-    chain.insert(4, 2);
-    chain.insert(6, 2);
-    chain.insert(7, 2);
-    chain.insert(8, 2);
-    chain.insert(8, 2);
-    chain.insert(9, 2);
-    chain.insert(29, 2111);
+    vector<int> values = generate_random(10,0,100);
+    vector<int> keys = generate_keys_unique(10,0);
+    vector<unique_ptr<AVL>> copies2 = create_and_fill<AVL>(keys, values, 10);
+    copies2[1]->insert(333,1);
+    copies2[1]->insert(433,1);
+    copies2[1]->print_all();
 
-    chain.print();
-    cout << chain.getsize();
-    cout << endl;
-    cout << chain.get_posiotion(2);
-    cout << endl;
-    cout << chain.getqua();
-    cout << endl;
-    cout << chain.get_biggest();
-}
+    // copies[1]->insert(104,1000);
+    // copies[1]->insert(11,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->insert(111,1000);
+    // copies[1]->print_all();
+
+
+ }

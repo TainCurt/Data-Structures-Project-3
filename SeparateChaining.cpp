@@ -38,34 +38,44 @@ void SeparateChaining::print()
 
 void SeparateChaining::insert(int k, int v)
 {
-    if (size == bucket)
-    {
-        increase_bucket();
-    }
-
     int hash = hash_fun(k);
-    Element *newElement = new Element(k, v);
+    Element* newElement = new Element(k, v);
+
+    int chain_length = 0;
+
     if (data[hash] == nullptr)
     {
         data[hash] = newElement;
+        newElement->position = 0;
         size++;
+        chain_length = 1;
     }
     else
     {
-        data[hash]->position++;
-        if (biggest_bucket < data[hash]->position)
+        Element* current = data[hash];
+        while (current->next != nullptr)
         {
-            biggest_bucket = data[hash]->position + 1;
+            current = current->next;
+            chain_length++;
         }
-        Element *last = data[hash];
-        while (last->next != nullptr)
-        {
-            last = last->next;
-        }
-        last->next = newElement;
+        chain_length++;
+        newElement->position = chain_length - 1;
+        current->next = newElement;
     }
+
     quantity++;
+
+    if (chain_length > biggest_bucket)
+    {
+        biggest_bucket = chain_length;
+    }
+
+    if (biggest_bucket >= 15)
+    {
+        increase_bucket();
+    }
 }
+
 
 void SeparateChaining::remove(int k, int v)
 {
@@ -99,27 +109,14 @@ void SeparateChaining::remove(int k, int v)
     std::cout << "No element there! \n";
 }
 
-// void SeparateChaining::calc_size()
-// {
-//     for (int i = 0; i < bucket; i++)
-//     {
-//         if (data[i])
-//         {
-//             size++;
-//         }
-//     }
-
-// }
-
-// void SeparateChaining::load_factor()
-// {
-//     lf =
-// }
-
 void SeparateChaining::increase_bucket()
 {
+    std::cout << "nie wiem moze zadziala mam dosc nie chce avl";
     int old_bucket = bucket;
-    bucket *= 2;
+
+    bucket = (size == 0) ? 1 : bucket * 2;
+
+    // bucket *= 2;
     biggest_bucket = 0;
     size = 0;
     Element **temp = new Element *[bucket];
@@ -131,8 +128,7 @@ void SeparateChaining::increase_bucket()
     for (int i = 0; i < old_bucket; i++)
     {
         Element *origin = data[i];
-        // Element *prev_origin = nullptr;
-        if (data[i] == nullptr)
+        if (data[i] != nullptr)
         {
             size++;
         }
@@ -143,23 +139,6 @@ void SeparateChaining::increase_bucket()
             origin->next = temp[hash];
             temp[hash] = origin;
             origin = next;
-
-            // prev_origin = origin->next;
-
-            // int hash = hash_fun(origin->key);
-
-            // if(temp[hash] == nullptr)
-            // {
-            //     temp[hash] = origin;
-            //     temp[hash]->next = nullptr;
-            // }
-            // else
-            // {
-            //     Element* next = temp[hash]->next;
-            //     temp[hash]->next = origin;
-            //     origin->next = next;
-            // }
-            // origin = prev_origin;
         }
     }
 
@@ -170,15 +149,20 @@ void SeparateChaining::increase_bucket()
         if (data[i])
         {
             size++;
+            int chain_len = 0;
+            Element* current = data[i];
+            while(current != nullptr)
+            {
+                current->position = chain_len;
+                chain_len++;
+                current = current->next;
+            }
+
+            if(chain_len > biggest_bucket)
+            {
+                biggest_bucket = chain_len;
+            }
         }
-        // while (data[i] != nullptr)
-        // {
-        //     data[i]->position++;
-        //     if (biggest_bucket < data[i]->position)
-        //     {
-        //         biggest_bucket = data[i]->position + 1;
-        //     }
-        //     data[i] = data[i]->next;
-        // }
+
     }
 }

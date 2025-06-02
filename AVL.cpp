@@ -1,7 +1,14 @@
 #include "AVL.h"
 #include "iostream"
 
-AVL::AVL() : data(nullptr), bucket(0) {}
+AVL::AVL() : data(nullptr), bucket(0)
+{
+    data = new AVL_Node *[bucket];
+    for (int i = 0; i < bucket; i++)
+    {
+        data[i] = nullptr;
+    }
+}
 
 AVL::AVL(int b) : bucket(b)
 {
@@ -131,6 +138,11 @@ void AVL::insert(int k, int v)
 {
     int hash = hash_fun(k);
     data[hash] = private_insert(data[hash], k, v);
+
+    if (data[hash] && data[hash]->height >= 10)
+    {
+        increase_bucket();
+    }
 }
 
 AVL_Node *AVL::find_min(AVL_Node *node)
@@ -250,4 +262,51 @@ void AVL::print(AVL_Node *node, int depth)
     std::cout << "(key: " << node->key << ", val: " << node->value << ", h: " << node->height << ")\n";
 
     print(node->left, depth + 1);
+}
+
+void AVL::increase_bucket()
+{
+    int old_bucket = bucket;
+    AVL_Node **old_data = data;
+
+    bucket *= 2;
+    data = new AVL_Node *[bucket];
+    for (int i = 0; i < bucket; ++i)
+    {
+        data[i] = nullptr;
+    }
+
+    for (int i = 0; i < old_bucket; ++i)
+    {
+        reinsert_tree(old_data[i]);
+    }
+
+    for (int i = 0; i < old_bucket; ++i)
+    {
+        destroy_tree(old_data[i]);
+    }
+
+    delete[] old_data;
+}
+
+void AVL::reinsert_tree(AVL_Node *node)
+{
+    if (!node)
+    {
+        return;
+    }
+    reinsert_tree(node->left);
+    reinsert_tree(node->right);
+    insert(node->key, node->value);
+}
+
+void AVL::destroy_tree(AVL_Node *node)
+{
+    if (!node)
+    {
+        return;
+    }
+    destroy_tree(node->left);
+    destroy_tree(node->right);
+    delete node;
 }

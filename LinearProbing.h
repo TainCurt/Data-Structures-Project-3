@@ -5,7 +5,6 @@ struct Linear_Element
     int key = 0;
     int value = 0;
     bool is_occupied = false;
-    // int occupied;
 };
 
 class LinearProbing
